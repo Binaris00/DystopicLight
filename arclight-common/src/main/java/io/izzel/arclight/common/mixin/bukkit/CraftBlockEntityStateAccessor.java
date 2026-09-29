@@ -9,4 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 public interface CraftBlockEntityStateAccessor {
     @Accessor("tileEntity")
     BlockEntity arclight$getBlockEntity();
+
+    @Accessor("snapshot")
+    BlockEntity arclight$getSnapshot();
 }
