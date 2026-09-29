@@ -1,8 +1,0 @@
-name: DiagnoseWeather
-main: com.dystopia.diagnose.DiagnoseWeather
-version: 1.0
-api-version: 1.21
-commands:
-  diag:
-    description: Diagnostico del clima
-    usage: /diag <state|storm <world>|clear <world>|clear60 <world>>
