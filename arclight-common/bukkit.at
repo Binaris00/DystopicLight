@@ -28,3 +28,6 @@ public org/bukkit/craftbukkit/v/inventory/CraftMetaCrossbow/<init>(Lorg/bukkit/c
 public org/bukkit/craftbukkit/v/inventory/CraftMetaSuspiciousStew/<init>(Lorg/bukkit/craftbukkit/v/inventory/CraftMetaItem;)V
 public org/spigotmc/ActivationRange$ActivationType/boundingBox
 public org/bukkit/craftbukkit/v/inventory/CraftMetaItem/<init>(Lnet/minecraft/nbt/CompoundTag;)V
+public org/bukkit/craftbukkit/v/block/CraftBlockEntityState/getTileEntity()Lnet/minecraft/world/level/block/entity/BlockEntity;
+public org/bukkit/craftbukkit/v/block/CraftBlockEntityState/getSnapshot()Lnet/minecraft/world/level/block/entity/BlockEntity;
+public org/bukkit/craftbukkit/v/block/CraftBlockEntityState/getTileEntityFromWorld()Lnet/minecraft/world/level/block/entity/BlockEntity;

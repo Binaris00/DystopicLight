@@ -15,6 +15,7 @@
     "CraftAbstractVillagerMixin",
     "CraftAnvilViewMixin",
     "CraftBlockEntityStateAccessor",
+    "CraftBlockEntityStateMixin",
     "CraftBlockMixin",
     "CraftBlockStateMixin",
     "CraftBlockTypeMixin",

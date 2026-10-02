@@ -22,6 +22,7 @@ import io.izzel.arclight.common.mod.server.ArclightServer;
 import io.izzel.arclight.common.mod.server.entity.ArclightSpawnReason;
 import io.izzel.arclight.common.mod.server.event.ArclightEventFactory;
 import io.izzel.arclight.common.mod.server.world.LevelPersistentData;
+import io.izzel.arclight.common.mod.server.world.ArclightWorldData;
 import io.izzel.arclight.common.mod.server.world.WorldSymlink;
 import io.izzel.arclight.common.mod.util.ArclightCaptures;
 import io.izzel.arclight.common.mod.util.DelegateWorldInfo;
@@ -252,6 +253,10 @@ public abstract class ServerLevelMixin extends LevelMixin implements ServerLevel
                 }
             }
         }
+        if (worldInfo instanceof DerivedLevelData) {
+            var worldData = this.getDataStorage().computeIfAbsent(ArclightWorldData.factory(), "arclight_world_data");
+            ((DerivedLevelDataBridge) worldInfo).bridge$loadWorldData(worldData);
+        }
         this.spigotConfig = new SpigotWorldConfig(worldInfo.getLevelName());
         this.uuid = WorldUUID.getUUID(levelSave.getDimensionPath(this.dimension()).toFile());
         ((ServerChunkCacheBridge) this.chunkSource).bridge$setViewDistance(spigotConfig.viewDistance);
@@ -264,10 +269,14 @@ public abstract class ServerLevelMixin extends LevelMixin implements ServerLevel
         }
     }
 
-    @Inject(method = "saveLevelData", at = @At("RETURN"))
+    @Inject(method = "saveLevelData", at = @At("HEAD"))
     private void arclight$savePdc(CallbackInfo ci) {
         var data = this.getDataStorage().computeIfAbsent(LevelPersistentData.factory(), "bukkit_pdc");
         data.save(this.world);
+        if (this.serverLevelData instanceof DerivedLevelData) {
+            var worldData = this.getDataStorage().computeIfAbsent(ArclightWorldData.factory(), "arclight_world_data");
+            ((DerivedLevelDataBridge) this.serverLevelData).bridge$saveWorldData(worldData);
+        }
     }
 
     @Inject(method = "gameEvent", cancellable = true, at = @At("HEAD"))
